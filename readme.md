@@ -1,36 +1,22 @@
-This utility works out wip from Jira data for each date in a range and shows the max value.
+This utility calculates flow metric data from a Jira extract CSV file.  Currently, it calculates max wip over a given month and average flow time.
 
-The columns the utility uses are In Progress, Deploying, Deployed, Done.
+This has been created as Jupyter notebook.  However the cell with the comment "working cell" at the top can be cut and pasted and run as a python script.
 
-In does not matter if a story moves across those columns - if it is present in any of them then they are included in the wip count.
+Flow time is calculated as Done date (if present) - In Progress Date.
 
-It will need to (pseudo code):
+Wip as calculated as follows.  For each row, an earliest and latest date are determined.  Wip is then stacked by adding 1 to each day in the range between earliest and latest date.   Some rules:
 
-- open a csv file
-- a dictionary with key = date and value = wip count
-- look at each row in the csv, look for date ranges
-- for each date in the range, add 1 to the date dictionary for that date
-- Do not count anything after the Done date if that is present.
+- If a story is not done, then the latest date is the last day of the month.
+- If a story started before the current month, then the earliest date is the first day of the month.
 
-If Done date is blank, from each row:
-	Count from In Progess Date to end of date range (e.g. end of month)
-	Increment count for each date found
-else if Done date is present
-	Count from In Progress Date to Done date - 1	 
-	Increment count for each date found
+The header for a compatible file looks like the below.  This utility only reads the ID, In Progress, Deploying, Deployed, Done columns.
 
+ID,Link,Name,Backlog,Ready,In Progress,Deploying,Deployed,Done,Type,
 
-Example:
+Date format is yyyy-mm-dd as a string.
 
-2021-08-25		2021-09-06	
-2021-08-17	2021-08-17		
-2021-08-10		2021-08-13	
-2021-07-30		2021-08-23	
-2021-06-29			
-2021-08-04			2021-08-04
-2021-08-17	2021-08-17	2021-08-17	2021-08-19
-2021-08-23		2021-08-24	2021-08-26
-2021-08-20			2021-08-26
-2021-08-19			2021-08-27
-2021-07-21	2021-07-28	2021-07-30	2021-08-02
-2021-07-29	2021-07-30	2021-08-09	2021-08-10
+Future enhancements being considered:
+
+- Add tags so that work types and unplanned work types can be calculated
+- Create a format such that charts in Google Sheets can be created without too much cut and pasting
+- Count no of days a story spends in each column. 
