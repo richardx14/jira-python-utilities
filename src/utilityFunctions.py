@@ -2,6 +2,10 @@
 
 from datetime import date
 
+fileName = "/Users/richard.holloway/Development/hmrc/jira-to-analytics/dlk-output.csv"
+
+defaultCurrentMonth = "09"
+
 ignoreList = ["DLK-853", "DLK-854", "DLK-893", "DLK-695"]
 
 readyColumn = 4

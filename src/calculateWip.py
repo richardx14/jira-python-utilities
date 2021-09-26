@@ -33,7 +33,7 @@ def findMaxWip(wipDictionary):
     
     return maxWipDayAndCount
 
-defaultCurrentMonth = "09"
+defaultCurrentMonth = utilityFunctions.defaultCurrentMonth
 
 print(f"Current default month {defaultCurrentMonth}")
 
@@ -43,7 +43,7 @@ if currentMonth == "" : currentMonth = defaultCurrentMonth
     
 numberOfDaysInMonth = monthrange(2021, int(currentMonth))[1]
 
-fileName = "/Users/richard.holloway/Development/hmrc/jira-to-analytics/dlk-output.csv"
+fileName = utilityFunctions.fileName
 
 readyColumn = 4
 inProgressColumn = 5

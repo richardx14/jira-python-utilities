@@ -19,7 +19,7 @@ def calculateFlowTime(startDate, endDate):
 
 #################################
 
-defaultCurrentMonth = "09"
+defaultCurrentMonth = utilityFunctions.defaultCurrentMonth
 
 print(f"Current default month {defaultCurrentMonth}")
 
@@ -29,7 +29,7 @@ if currentMonth == "" : currentMonth = defaultCurrentMonth
 
 flowTimes = []
 
-fileName = "/Users/richard.holloway/Development/hmrc/jira-to-analytics/dlk-output.csv"
+fileName = utilityFunctions.fileName
 
 skippedStories = []
 
